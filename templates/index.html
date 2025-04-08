@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FitBite - Calorie Intake and Diet Plan Generator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <img src="static\rvu-logo-removebg-preview.png" alt="Logo" height="100" width="200">
+    <div class="container">
+        <h1>FitBite - Calorie Intake and Diet Plan Generator</h1>
+        <form method="post" action="/">
+            <label for="age">Age:</label>
+            <input type="text" id="age" name="age" required><br>
+            
+            <label for="height">Height (cm):</label>
+            <input type="text" id="height" name="height" required><br>
+
+            <label for="weight">Weight (kg):</label>
+            <input type="text" id="weight" name="weight" required><br>
+
+            <label for="gender">Gender:</label>
+            <select id="gender" name="gender">
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+            </select><br>
+
+            <label for="activity">Physical Activity:</label>
+            <select id="activity" name="activity">
+                <option value="Sedentary">Sedentary</option>
+                <option value="Lightly active">Lightly active</option>
+                <option value="Moderately active">Moderately active</option>
+                <option value="Very active">Very active</option>
+                <option value="Extra active">Extra active</option>
+            </select><br>
+
+            <label for="diet">Diet Type:</label>
+            <select id="diet" name="diet">
+                <option value="Vegan">Vegan</option>
+                <option value="Vegetarian">Vegetarian</option>
+                <option value="Non-vegetarian">Non-vegetarian</option>
+            </select><br>
+
+            <input type="submit" value="Calculate">
+        </form>
+    </div>
+</body>
+</html>
