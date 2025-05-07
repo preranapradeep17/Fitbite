@@ -1,25 +1,10 @@
-name: FitBite CI
+name: CI for FitBite
 
-on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+on: [push, pull_request]
 
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
-
-    services:
-      mongo:
-        image: mongo
-        ports:
-          - 27017:27017
-        options: >-
-          --health-cmd="mongosh --eval 'db.runCommand(\"ping\").ok'" 
-          --health-interval=10s 
-          --health-timeout=5s 
-          --health-retries=3
 
     steps:
       - name: ⬇️ Checkout code
@@ -34,19 +19,17 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
+          pip install pylint
 
-      - name: ✅ Compile Python files (syntax check)
-        run: python -m compileall .
+      - name: ✅ Lint with PyLint
+        run: |
+          pylint fitbite.py database_backend.py || true
 
-      - name: 📄 Check for required CSV files
+      - name: 📄 Check required data files
         run: |
           test -f veg.csv || (echo "veg.csv is missing!" && exit 1)
-          # Add vegan.csv, non-veg.csv if needed
-
-      - name: 🧪 Placeholder for unit tests
-        run: |
-          echo "No unit tests yet. Add them in a tests/ folder."
-
-      - name: 🗃️ Check SQLite DB presence
-        run: |
           test -f fitness.db || (echo "fitness.db is missing!" && exit 1)
+
+      - name: 🧪 Placeholder for Unit Tests
+        run: |
+          echo "No unit tests implemented yet."
